@@ -1,0 +1,5 @@
+var items = document.getElementsByClassName('list-group-item');
+items[2].style.backgroundColor = 'green';
+
+const element = document.getElementById("items");
+element.style.fontWeight = "bold";
