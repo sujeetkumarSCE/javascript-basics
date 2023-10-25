@@ -14,3 +14,19 @@ ol.appendChild(li);
 document.body.appendChild(ol);
 
 li.style.backgroundColor = 'red';
+
+//const second = document.getElementsByClassName('list-group-item')
+items[1].style.fontWeight = 'bold';
+items[1].style.color = 'green';
+
+// Change font color to green for the second item
+const secondItem = document.querySelectorAll('.list-group-item')[1];
+if (secondItem) {
+  secondItem.style.color = 'green';
+}
+
+// Select all odd elements and change their background color to green
+const oddItems = document.querySelectorAll('.list-group-item:nth-child(odd)');
+oddItems.forEach(item => {
+  item.style.backgroundColor = 'green';
+});
