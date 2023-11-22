@@ -1,0 +1,70 @@
+// Simulated database with posts and user activity time
+const database = {
+  posts: [],
+  lastActivityTime: null,
+};
+
+// Simulated functions to create, update, and delete posts
+function createPost(post) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      database.posts.push(post);
+      resolve(post);
+    }, 1000);
+  });
+}
+
+function updateLastUserActivityTime() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      database.lastActivityTime = new Date();
+      resolve(database.lastActivityTime);
+    }, 1000);
+  });
+}
+
+function deletePost(postId) {
+  return new Promise((resolve, reject) => {
+    // Simulated success
+    const success = true;
+
+    setTimeout(() => {
+      if (success) {
+        database.posts = database.posts.filter((post) => post.id !== postId);
+        resolve('Post deleted successfully');
+      } else {
+        reject(new Error('Failed to delete post'));
+      }
+    }, 1000);
+  });
+}
+
+// Function to handle the entire process using Promise.all
+function handlePostCreationAndDeletion(post) {
+  Promise.all([createPost(post), updateLastUserActivityTime()])
+    .then(([createdPost, updatedLastActivityTime]) => {
+      console.log('Post created:', createdPost);
+      console.log('Last activity time updated:', updatedLastActivityTime);
+
+      // Now that both promises are resolved, log all posts and last activity time
+      console.log('All posts:', database.posts);
+      console.log('Last activity time:', updatedLastActivityTime);
+
+      // Simulate deleting the last post
+      const lastPostId = database.posts[database.posts.length - 1].id;
+      return deletePost(lastPostId);
+    })
+    .then((deleteResult) => {
+      console.log(deleteResult);
+
+      // Log the remaining posts after deleting the last post
+      console.log('Remaining posts:', database.posts);
+    })
+    .catch((error) => {
+      console.error('Error:', error.message);
+    });
+}
+
+// Example usage
+const newPost = { id: 1, content: 'New post content' };
+handlePostCreationAndDeletion(newPost);
