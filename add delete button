@@ -1,0 +1,78 @@
+function submitForm() {
+        // Get form values
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+
+        // Do something with the form values (e.g., add to the list)
+        var userList = document.getElementById('userList');
+        var listItem = document.createElement('li');
+        
+        // Create delete button and attach event listener
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function () {
+            deleteUser(user);
+        });
+
+        // Display user details and delete button
+        listItem.textContent = 'Name: ' + name + ', Email: ' + email + ', Phone: ' + phone;
+        listItem.appendChild(deleteButton);
+        userList.appendChild(listItem);
+
+        // Save user details to local storage
+        var user = { name, email, phone };
+        saveToLocalStorage(user);
+
+        // Clear the form fields using form ID
+        document.getElementById('userForm').reset();
+    }
+
+    function saveToLocalStorage(user) {
+        // Retrieve existing users from local storage
+        var existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        // Add the new user to the array
+        existingUsers.push(user);
+
+        // Save the updated array back to local storage
+        localStorage.setItem('users', JSON.stringify(existingUsers));
+    }
+
+    function displayUser(user) {
+        // Display user details on the screen
+        var userList = document.getElementById('userList');
+        var listItem = document.createElement('li');
+        
+        // Create delete button and attach event listener
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function () {
+            deleteUser(user);
+        });
+
+        // Display user details and delete button
+        listItem.textContent = `Name: ${user.name}, Email: ${user.email}, Phone: ${user.phone}`;
+        listItem.appendChild(deleteButton);
+        userList.appendChild(listItem);
+    }
+
+    function deleteUser(user) {
+        // Remove user from local storage
+        var existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+        var updatedUsers = existingUsers.filter(function (existingUser) {
+            return existingUser.name !== user.name || existingUser.email !== user.email || existingUser.phone !== user.phone;
+        });
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+        // Remove user from UI
+        var userList = document.getElementById('userList');
+        var userItems = userList.getElementsByTagName('li');
+        for (var i = 0; i < userItems.length; i++) {
+            var itemText = userItems[i].textContent;
+            if (itemText.includes(user.name) && itemText.includes(user.email) && itemText.includes(user.phone)) {
+                userList.removeChild(userItems[i]);
+                break;
+            }
+        }
+    }
