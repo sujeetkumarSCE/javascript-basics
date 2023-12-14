@@ -1,0 +1,110 @@
+function getButter() {
+    return new Promise((resolve, reject) => {
+        // ... Code to get butter
+        if (/* Condition for success */) {
+            resolve("Butter obtained");
+        } else {
+            reject("Failed to get butter");
+        }
+    });
+}
+
+function getColdDrinks() {
+    return new Promise((resolve, reject) => {
+        // ... Code to get cold drinks
+        if (/* Condition for success */) {
+            resolve("Cold drinks obtained");
+        } else {
+            reject("Failed to get cold drinks");
+        }
+    });
+}
+
+async function getButterAndDrinks() {
+    try {
+        const butterStatus = await getButter();
+        console.log(butterStatus);
+
+        const coldDrinksStatus = await getColdDrinks();
+        console.log(coldDrinksStatus);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Placeholder functions for Task 2 - Handle Promise.all with Async/Await
+function promise1() {
+    return new Promise((resolve) => resolve("Promise 1 resolved"));
+}
+
+function promise2() {
+    return new Promise((resolve) => resolve("Promise 2 resolved"));
+}
+
+function promise3() {
+    return new Promise((resolve) => resolve("Promise 3 resolved"));
+}
+
+async function handlePromiseAll() {
+    const promisesArray = [promise1(), promise2(), promise3()];
+
+    try {
+        const results = await Promise.all(promisesArray);
+        console.log(results);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Placeholder functions for Task 3 - Convert createPost and deletePost to Async/Await
+function createPost() {
+    return new Promise((resolve) => resolve("Post created"));
+}
+
+function deletePost() {
+    return new Promise((resolve) => resolve("Post deleted"));
+}
+
+async function createPostAsync() {
+    try {
+        const post = await createPost();
+        console.log(post);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function deletePostAsync() {
+    try {
+        const result = await deletePost();
+        console.log(result);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Placeholder functions for Task 6 - Plan a trip to Manali using Promises
+function planTrip() {
+    return new Promise((resolve, reject) => {
+        // ... Code to plan the trip to Manali
+        if (/* Condition for success */) {
+            resolve("Trip to Manali planned!");
+        } else {
+            reject("Failed to plan the trip");
+        }
+    });
+}
+
+planTrip()
+    .then((tripStatus) => {
+        console.log(tripStatus);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+// Call the functions
+getButterAndDrinks();
+handlePromiseAll();
+createPostAsync();
+deletePostAsync();
